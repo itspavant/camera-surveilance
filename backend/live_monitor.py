@@ -13,16 +13,7 @@ from tensorflow.keras.applications import MobileNetV2
 SEQ_LEN = 16
 IMG_SIZE = 224
 
-IS_WEBCAM = False   # set False when using video file
-
-INFER_EVERY_N_FRAMES_WEBCAM = 2
-INFER_EVERY_N_FRAMES_VIDEO = 5
-
-VIDEO_DELAY_MS = 30   # smooth playback for files (~33ms = 30fps)
-
-frame_count = 0
-last_prob = None
-
+IS_WEBCAM = True
 
 def build_model():
     base_cnn = MobileNetV2(
@@ -49,7 +40,7 @@ def build_model():
 
 
 # ================= CONFIG =================
-MODEL_PATH = r"PATH\models\violence_cnn_lstm.keras" # Ensure to give path to model
+MODEL_PATH = r"D:\Machine Learning\camera-surveilance\models\violence_cnn_lstm.keras"
 SEQ_LEN = 16
 THRESHOLD = 0.6      # lower than before (video-level)
 COOLDOWN = 2         # seconds
@@ -73,11 +64,11 @@ def preprocess_frame(frame):
     frame = preprocess_input(frame.astype("float32"))
     return frame
 
+# 🔁 Choose ONE:
 if IS_WEBCAM:
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(0)   # Webcam
 else:
-    cap = cv2.VideoCapture("videos/violent/file_000004.avi")
-
+    cap = cv2.VideoCapture("videos/normal/file_000824.avi") # Replace with the video path you want to load with
 
 if not cap.isOpened():
     print("❌ Cannot open video source")
@@ -85,39 +76,23 @@ if not cap.isOpened():
 
 print("✅ Video surveillance started (press Q to quit)")
 
-frame_count = 0
-last_prob = None
-
 while True:
     ret, frame = cap.read()
     if not ret:
         break
 
-    frame_count += 1
-
-    # Preprocess and buffer frames (VIDEO, not frame-based)
     processed = preprocess_frame(frame)
     frame_buffer.append(processed)
 
-    display_text = "Monitoring..."
-    color = (255, 255, 255)
+    display_text = "Warming up..."
+    color = (0, 255, 255)
 
-    # Choose inference rate based on input source
-    infer_rate = (
-        INFER_EVERY_N_FRAMES_WEBCAM
-        if IS_WEBCAM
-        else INFER_EVERY_N_FRAMES_VIDEO
-    )
+    if len(frame_buffer) == SEQ_LEN:
+        clip = np.expand_dims(np.array(frame_buffer), axis=0)  # (1, 16, 224, 224, 3)
+        prob = model.predict(clip, verbose=0)[0][0]
 
-    # Run inference ONLY every N frames
-    if len(frame_buffer) == SEQ_LEN and frame_count % infer_rate == 0:
-        clip = np.expand_dims(np.array(frame_buffer), axis=0)
-        last_prob = model.predict(clip, verbose=0)[0][0]
-
-    # Use last prediction for display
-    if last_prob is not None:
-        if last_prob > THRESHOLD:
-            display_text = f"ALERT: Violence Detected ({last_prob*100:.1f}%)"
+        if prob > THRESHOLD:
+            display_text = f"ALERT: Violence ({prob*100:.2f}%)"
             color = (0, 0, 255)
 
             now = time.time()
@@ -125,10 +100,9 @@ while True:
                 winsound.Beep(1200, 300)
                 last_alert = now
         else:
-            display_text = f"Normal Activity ({last_prob*100:.1f}%)"
+            display_text = f"NORMAL ({prob*100:.2f}%)"
             color = (0, 255, 0)
 
-    # Overlay result
     cv2.putText(
         frame,
         display_text,
@@ -141,18 +115,8 @@ while True:
 
     cv2.imshow("AI Violence Detection System", frame)
 
-    # Proper pacing + quit on 'q'
-    if IS_WEBCAM:
-        key = cv2.waitKey(1) & 0xFF
-    else:
-        key = cv2.waitKey(VIDEO_DELAY_MS) & 0xFF
-
-    if key == ord('q'):
-        print("🛑 Exiting surveillance...")
+    if cv2.waitKey(25) & 0xFF == ord("q"):
         break
-
-
-
 
 cap.release()
 cv2.destroyAllWindows()
