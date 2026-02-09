@@ -50,7 +50,7 @@ Video Frames → CNN (per frame) → Temporal Aggregation (LSTM) → Classificat
 └── README.md
 
 ````
-
+Link to Kaggle Notebook: [Kaggle Notebook](https://www.kaggle.com/code/tpavanteja/notebook1f9f1f599d)
 
 ## ⚙️ Installation & Setup
 
