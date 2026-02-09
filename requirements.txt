@@ -1,0 +1,8 @@
+flask==2.3.3
+flask-cors==4.0.0
+tensorflow==2.16.1
+numpy==1.26.4
+opencv-python
+scikit-learn==1.4.2
+matplotlib
+seaborn
