@@ -54,6 +54,8 @@ Link to Kaggle Notebook: [Kaggle Notebook](https://www.kaggle.com/code/tpavantej
 
 ## ⚙️ Installation & Setup
 
+> Recommended Python version: 3.10 or 3.11
+
 ### 1️⃣ Clone the Repository
 ```bash
 git clone https://github.com/your-username/your-repo-name.git
