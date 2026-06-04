@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Violence Detection - Model Comparison Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f5f5f5; }
+        .container { background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h1, h2 { color: #333; }
+        table { border-collapse: collapse; width: 100%; margin: 20px 0; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #3498db; color: white; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        .best { background-color: #d4edda; font-weight: bold; }
+        img { max-width: 100%; height: auto; margin: 20px 0; }
+        .metric-box { display: inline-block; margin: 10px; padding: 15px; background-color: #ecf0f1; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎥 Violence Detection Model Comparison</h1>
+        <p><strong>Generated:</strong> 2026-06-02 19:00:34</p>
+        
+        <h2>Best Performing Model</h2>
+        <div class="metric-box">
+            <strong>Model:</strong> MobileNet_LSTM<br>
+            <strong>F1 Score:</strong> 0.7266<br>
+            <strong>Accuracy:</strong> 0.7053<br>
+            <strong>AUC-ROC:</strong> 0.7565
+        </div>
+        
+        <h2>Detailed Results</h2>
+        <table>
+            <tr>
+                <th>Model Name</th>
+                <th>Accuracy</th>
+                <th>Precision</th>
+                <th>Recall</th>
+                <th>F1 Score</th>
+                <th>AUC-ROC</th>
+                <th>Sensitivity</th>
+                <th>Specificity</th>
+                <th>Training Time (s)</th>
+            </tr>
+
+            <tr>
+                <td>MobileNet_LSTM</td>
+                <td>0.7053</td>
+                <td>0.6776</td>
+                <td>0.7832</td>
+                <td>0.7266</td>
+                <td>0.7565</td>
+                <td>0.7832</td>
+                <td>0.6274</td>
+                <td>3123.86</td>
+            </tr>
+
+            <tr>
+                <td>EfficientNet_LSTM</td>
+                <td>0.6806</td>
+                <td>0.6714</td>
+                <td>0.7074</td>
+                <td>0.6889</td>
+                <td>0.7405</td>
+                <td>0.7074</td>
+                <td>0.6538</td>
+                <td>3092.45</td>
+            </tr>
+
+            <tr>
+                <td>MobileNet_BiLSTM</td>
+                <td>0.6929</td>
+                <td>0.7151</td>
+                <td>0.6415</td>
+                <td>0.6763</td>
+                <td>0.7550</td>
+                <td>0.6415</td>
+                <td>0.7444</td>
+                <td>3928.70</td>
+            </tr>
+
+            <tr>
+                <td>EfficientNet_BiLSTM</td>
+                <td>0.6309</td>
+                <td>0.6064</td>
+                <td>0.7459</td>
+                <td>0.6690</td>
+                <td>0.7077</td>
+                <td>0.7459</td>
+                <td>0.5159</td>
+                <td>3120.86</td>
+            </tr>
+
+            <tr>
+                <td>3D_CNN</td>
+                <td>0.5788</td>
+                <td>0.5828</td>
+                <td>0.5550</td>
+                <td>0.5685</td>
+                <td>0.6228</td>
+                <td>0.5550</td>
+                <td>0.6026</td>
+                <td>3083.74</td>
+            </tr>
+
+            <tr>
+                <td>ResNet_BiLSTM</td>
+                <td>0.5815</td>
+                <td>0.6128</td>
+                <td>0.4426</td>
+                <td>0.5140</td>
+                <td>0.6402</td>
+                <td>0.4426</td>
+                <td>0.7203</td>
+                <td>5870.33</td>
+            </tr>
+
+            <tr>
+                <td>ResNet_LSTM</td>
+                <td>0.5294</td>
+                <td>0.5960</td>
+                <td>0.1826</td>
+                <td>0.2796</td>
+                <td>0.6072</td>
+                <td>0.1826</td>
+                <td>0.8762</td>
+                <td>4405.70</td>
+            </tr>
+
+        </table>
+        
+        <h2>Visualizations</h2>
+        <h3>Model Comparison</h3>
+        <img src="model_comparison.png" alt="Model Comparison">
+
+        <h3>MobileNet_LSTM</h3>
+        <img src="plots/MobileNet_LSTM_evaluation.png" alt="MobileNet_LSTM Evaluation">
+
+        <h3>EfficientNet_LSTM</h3>
+        <img src="plots/EfficientNet_LSTM_evaluation.png" alt="EfficientNet_LSTM Evaluation">
+
+        <h3>MobileNet_BiLSTM</h3>
+        <img src="plots/MobileNet_BiLSTM_evaluation.png" alt="MobileNet_BiLSTM Evaluation">
+
+        <h3>EfficientNet_BiLSTM</h3>
+        <img src="plots/EfficientNet_BiLSTM_evaluation.png" alt="EfficientNet_BiLSTM Evaluation">
+
+        <h3>3D_CNN</h3>
+        <img src="plots/3D_CNN_evaluation.png" alt="3D_CNN Evaluation">
+
+        <h3>ResNet_BiLSTM</h3>
+        <img src="plots/ResNet_BiLSTM_evaluation.png" alt="ResNet_BiLSTM Evaluation">
+
+        <h3>ResNet_LSTM</h3>
+        <img src="plots/ResNet_LSTM_evaluation.png" alt="ResNet_LSTM Evaluation">
+
+    </div>
+</body>
+</html>
