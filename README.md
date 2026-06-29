@@ -144,7 +144,7 @@ Violence / Non-Violence
 Violence-Detection/
 │
 ├── dataset/
-├── extracted_frames/
+├── dataset_frames/
 ├── models/
 ├── violence_detection_results/
 │   ├── metrics/
@@ -153,6 +153,7 @@ Violence-Detection/
 │   ├── report.html
 │   ├── detailed_results.json
 │   └── final_comparison.csv
+│   └── model_comparision.png
 │
 ├── train.py
 ├── requirements.txt
