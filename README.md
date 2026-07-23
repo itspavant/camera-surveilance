@@ -219,17 +219,6 @@ The framework automatically generates:
 - 📄 HTML Evaluation Report
 - 📁 JSON Metrics
 - 📊 CSV Comparison Table
-
----
-
-## 🔮 Future Work
-
-- Real-time CCTV surveillance integration
-- Live webcam inference
-- Automated alert generation
-- Edge AI deployment
-- Vision Transformer (ViT)
-- Temporal Attention Networks
 - Model quantization for embedded devices
 - Multi-class violence detection
 
